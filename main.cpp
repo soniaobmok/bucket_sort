@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 
-void insertionSort(std::vector<float>);
-void print(const std::vector<float>&);
+#include "utils.h"
 
 const int BucketNumber = 100;
 
@@ -31,6 +30,9 @@ int main() {
         }
     }
 
+    int maxCollision = findCollision(buckets);
+    std::cout << "\nmaxCollision = " << maxCollision << std::endl;
+
     return 0;
 }
 
@@ -45,8 +47,21 @@ void insertionSort(std::vector<float> container) {
     print(container);
 }
 
-void print(const std::vector<float>& container) {
+void print(std::vector<float> container) {
     for (auto item : container) {
         std::cout << item << " ";
     }
+}
+
+int findCollision(std::vector<float>* container) {
+    int max = 0;
+    int collisionNumber;
+
+    for(int i = 0; i < BucketNumber; i++) {
+        collisionNumber = container[i].size();
+        if (collisionNumber > max) {
+            max = collisionNumber;
+        }
+    }
+    return max;
 }
